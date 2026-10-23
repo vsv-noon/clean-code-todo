@@ -9,7 +9,7 @@
 
 const taskInput = document.getElementById('new-task'); //Add a new task.
 const addButton = document.getElementsByTagName('button')[0]; //first button
-const incompleteTaskHolder = document.getElementById('incompleteTasks'); //ul of #incompleteTasks
+const incompleteTaskHolder = document.getElementById('incomplete-tasks'); //ul of #incompleteTasks
 const completedTasksHolder = document.getElementById('completed-tasks'); //completed-tasks
 
 //New task list item
@@ -29,19 +29,24 @@ const createNewTaskElement = function (taskString) {
   const deleteButton = document.createElement('button'); //delete button
   const deleteButtonImg = document.createElement('img'); //delete button image
 
+  listItem.className = 'task-item';
+
   label.innerText = taskString;
-  label.className = 'task';
+  label.className = 'task task-item__label';
 
   //Each elements, needs appending
   checkBox.type = 'checkbox';
+  checkBox.className = 'task-item__checkbox';
   editInput.type = 'text';
-  editInput.className = 'task';
+  editInput.className = 'task task-item__input';
 
   editButton.innerText = 'Edit'; //innerText encodes special characters, HTML does not.
-  editButton.className = 'edit';
+  editButton.className = 'btn edit';
 
-  deleteButton.className = 'delete';
+  deleteButton.className = 'btn delete';
   deleteButtonImg.src = './remove.svg';
+  deleteButtonImg.alt = 'delete-button';
+  deleteButtonImg.className = 'btn-delete-img';
   deleteButton.appendChild(deleteButtonImg);
 
   //and appending.
@@ -73,7 +78,7 @@ const editTask = function () {
   const editInput = listItem.querySelector('input[type=text]');
   const label = listItem.querySelector('label');
   const editBtn = listItem.querySelector('.edit');
-  const containsClass = listItem.classList.contains('editMode');
+  const containsClass = listItem.classList.contains('edit-mode');
   //If class of the parent is .editmode
   if (containsClass) {
     //switch to .editmode
@@ -86,7 +91,7 @@ const editTask = function () {
   }
 
   //toggle .editmode on the parent.
-  listItem.classList.toggle('editMode');
+  listItem.classList.toggle('edit-mode');
 };
 
 //Delete task.
