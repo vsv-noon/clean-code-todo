@@ -19,7 +19,7 @@ const createNewTaskElement = function (taskString) {
 
   listItem.className = 'task-item';
 
-  label.innerText = taskString;
+  label.textContent = taskString;
   label.className = 'task task-item__label';
 
   checkBox.type = 'checkbox';
@@ -27,7 +27,7 @@ const createNewTaskElement = function (taskString) {
   editInput.type = 'text';
   editInput.className = 'task task-item__input';
 
-  editButton.innerText = 'Edit';
+  editButton.textContent = 'Edit';
   editButton.className = 'btn edit';
 
   deleteButton.className = 'btn delete';
@@ -59,11 +59,11 @@ const editTask = function () {
   const containsEditModeClass = listItem.classList.contains('edit-mode');
 
   if (containsEditModeClass) {
-    label.innerText = editInput.value;
-    editBtn.innerText = 'Edit';
+    label.textContent = editInput.value;
+    editBtn.textContent = 'Edit';
   } else {
-    editInput.value = label.innerText;
-    editBtn.innerText = 'Save';
+    editInput.value = label.textContent;
+    editBtn.textContent = 'Save';
   }
 
   listItem.classList.toggle('edit-mode');
