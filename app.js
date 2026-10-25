@@ -34,13 +34,9 @@ const createNewTaskElement = function (taskString) {
   deleteButtonImg.src = './remove.svg';
   deleteButtonImg.alt = 'delete-button';
   deleteButtonImg.className = 'btn-delete-img';
-  deleteButton.appendChild(deleteButtonImg);
+  deleteButton.append(deleteButtonImg);
 
-  listItem.appendChild(checkBox);
-  listItem.appendChild(label);
-  listItem.appendChild(editInput);
-  listItem.appendChild(editButton);
-  listItem.appendChild(deleteButton);
+  listItem.append(checkBox, label, editInput, editButton, deleteButton);
   return listItem;
 };
 
@@ -48,7 +44,7 @@ const addTask = function () {
   if (!newTask.value) return;
   const listItem = createNewTaskElement(newTask.value);
 
-  incompleteTaskHolder.appendChild(listItem);
+  incompleteTaskHolder.append(listItem);
   bindTaskEvents(listItem, taskCompleted);
 
   newTask.value = '';
@@ -82,13 +78,13 @@ const deleteTask = function () {
 
 const taskCompleted = function () {
   const listItem = this.parentNode;
-  completedTasksHolder.appendChild(listItem);
+  completedTasksHolder.append(listItem);
   bindTaskEvents(listItem, taskIncomplete);
 };
 
 const taskIncomplete = function () {
   const listItem = this.parentNode;
-  incompleteTaskHolder.appendChild(listItem);
+  incompleteTaskHolder.append(listItem);
   bindTaskEvents(listItem, taskCompleted);
 };
 
