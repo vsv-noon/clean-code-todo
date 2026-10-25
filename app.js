@@ -1,5 +1,5 @@
 const newTask = document.getElementById('new-task');
-const addButton = document.getElementsByTagName('button')[0];
+const addButton = document.getElementById('add-btn');
 const incompleteTaskHolder = document.getElementById('incomplete-tasks');
 const completedTasksHolder = document.getElementById('completed-tasks');
 
@@ -13,7 +13,7 @@ const createNewTaskElement = function (taskString) {
   const editInput = document.createElement('input');
 
   const editButton = document.createElement('button');
-
+  editButton.className = 'edit';
   const deleteButton = document.createElement('button');
   const deleteButtonImg = document.createElement('img');
 
@@ -92,11 +92,7 @@ const taskIncomplete = function () {
   bindTaskEvents(listItem, taskCompleted);
 };
 
-const ajaxRequest = function () {};
-
-addButton.onclick = addTask;
 addButton.addEventListener('click', addTask);
-addButton.addEventListener('click', ajaxRequest);
 
 const bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
   const checkBox = taskListItem.querySelector('input[type=checkbox]');
