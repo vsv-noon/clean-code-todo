@@ -40,7 +40,7 @@ const addTask = function () {
   const listItem = createNewTaskElement(newTask.value);
 
   incompleteTaskHolder.append(listItem);
-  bindTaskEvents(listItem, taskCompleted);
+  bindTaskEvents(listItem);
 
   newTask.value = '';
 };
@@ -71,34 +71,29 @@ const deleteTask = function () {
   ul.removeChild(listItem);
 };
 
-const taskCompleted = function () {
+const toggleTaskCompletionStatus = function () {
   const listItem = this.parentNode;
-  completedTasksHolder.append(listItem);
-  bindTaskEvents(listItem, taskIncomplete);
-};
-
-const taskIncomplete = function () {
-  const listItem = this.parentNode;
-  incompleteTaskHolder.append(listItem);
-  bindTaskEvents(listItem, taskCompleted);
+  const targetHolder = this.checked
+    ? completedTasksHolder
+    : incompleteTaskHolder;
+  targetHolder.append(listItem);
 };
 
 addButton.addEventListener('click', addTask);
 
-const bindTaskEvents = function (taskListItem, checkBoxEventHandler) {
+const bindTaskEvents = function (taskListItem) {
   const checkBox = taskListItem.querySelector('.task-item__checkbox');
   const editButton = taskListItem.querySelector('.edit');
   const deleteButton = taskListItem.querySelector('.delete');
 
   editButton.onclick = editTask;
   deleteButton.onclick = deleteTask;
-  checkBox.onchange = checkBoxEventHandler;
+  checkBox.onchange = toggleTaskCompletionStatus;
 };
 
-for (let i = 0; i < incompleteTaskHolder.children.length; i++) {
-  bindTaskEvents(incompleteTaskHolder.children[i], taskCompleted);
-}
-
-for (let i = 0; i < completedTasksHolder.children.length; i++) {
-  bindTaskEvents(completedTasksHolder.children[i], taskIncomplete);
+for (const task of [
+  ...incompleteTaskHolder.children,
+  ...completedTasksHolder.children,
+]) {
+  bindTaskEvents(task);
 }
