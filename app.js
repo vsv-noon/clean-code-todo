@@ -3,32 +3,35 @@ const addButton = document.getElementById('add-btn');
 const incompleteTaskHolder = document.getElementById('incomplete-tasks');
 const completedTasksHolder = document.getElementById('completed-tasks');
 
+const createElement = function (tagName, properties = {}) {
+  return Object.assign(document.createElement(tagName), properties);
+};
+
 const createNewTaskElement = function (taskString) {
-  const listItem = document.createElement('li');
-  const checkBox = document.createElement('input');
-  const label = document.createElement('label');
-  const editInput = document.createElement('input');
-  const editButton = document.createElement('button');
-  const deleteButton = document.createElement('button');
-  const deleteButtonImg = document.createElement('img');
+  const listItem = createElement('li', { className: 'task-item' });
+  const checkBox = createElement('input', {
+    type: 'checkbox',
+    className: 'task-item__checkbox',
+  });
+  const label = createElement('label', {
+    className: 'task task-item__label',
+    textContent: taskString,
+  });
+  const editInput = createElement('input', {
+    type: 'text',
+    className: 'task task-item__input',
+  });
+  const editButton = createElement('button', {
+    className: 'btn edit',
+    textContent: 'Edit',
+  });
+  const deleteButton = createElement('button', { className: 'btn delete' });
+  const deleteButtonImg = createElement('img', {
+    src: './remove.svg',
+    alt: 'delete-button',
+    className: 'btn-delete-img',
+  });
 
-  listItem.className = 'task-item';
-
-  label.textContent = taskString;
-  label.className = 'task task-item__label';
-
-  checkBox.type = 'checkbox';
-  checkBox.className = 'task-item__checkbox';
-  editInput.type = 'text';
-  editInput.className = 'task task-item__input';
-
-  editButton.textContent = 'Edit';
-  editButton.className = 'btn edit';
-
-  deleteButton.className = 'btn delete';
-  deleteButtonImg.src = './remove.svg';
-  deleteButtonImg.alt = 'delete-button';
-  deleteButtonImg.className = 'btn-delete-img';
   deleteButton.append(deleteButtonImg);
 
   listItem.append(checkBox, label, editInput, editButton, deleteButton);
